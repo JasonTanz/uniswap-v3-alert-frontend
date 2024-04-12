@@ -9,3 +9,8 @@ A web application that monitors the creation of new pools on Uniswap v3 and atta
 2. Event Listener Attachment: Upon detecting a new pool, it attaches a swap event listener to the pool.
 3. Real-Time Updates: All pool creations and swap events are broadcasted in real-time using Socket.io, ensuring timely updates to connected clients.
 
+## Tech Stack
+- React.js (Next.js)
+- TypeScript
+- Material UI
+- Socket.io 
