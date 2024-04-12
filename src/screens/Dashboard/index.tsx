@@ -19,7 +19,7 @@ export type DashboardScreenProps = {};
  */
 export const DashboardScreen: React.FC<DashboardScreenProps> = () => {
     // =============== STATE
-    const [tab, setTab] = useState("transactions");
+    const [tab, setTab] = useState("pools");
     const [latestPoolCreated, setLatestPoolCreated] = useState({} as TPool);
     const [latestSwapEvent, setLatestSwapEvent] = useState({} as TTransaction);
 
@@ -66,8 +66,6 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = () => {
             socket.on("newSwapEvent", (data: SwapEventData) =>
                 onHandleSwapEvent(data.transaction)
             );
-
-            socket.emit("msg", "Thanks thanks");
         });
 
         return () => {
