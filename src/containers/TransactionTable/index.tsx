@@ -9,7 +9,12 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { map, size } from "lodash";
-import { formatAddress, getTimeAgo } from "uniswap-frontend/utils/helper";
+import {
+    formatAddress,
+    formatNumber,
+    formatTokenName,
+    getTimeAgo,
+} from "uniswap-frontend/utils/helper";
 import { useLazyFetchData } from "uniswap-frontend/hooks/fetchDataHooks";
 import { Props } from "./props";
 import { TTransaction } from "uniswap-frontend/@types/common";
@@ -96,6 +101,7 @@ export const TransactionTable: React.FC<Props> = (props) => {
             <TableBody>
                 {map(data, (transactionData, index) => {
                     const poolData = transactionData?.pool;
+                    const txHash = transactionData?.transactionHash;
                     return (
                         <TableRow
                             key={index}
@@ -103,6 +109,13 @@ export const TransactionTable: React.FC<Props> = (props) => {
                                 "& td, & th": {
                                     border: 0,
                                 },
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                window.open(
+                                    `https://etherscan.io/tx/${txHash}`,
+                                    "_blank"
+                                );
                             }}
                         >
                             <TableCell sx={{ color: "rgb(155, 155, 155)" }}>
@@ -111,21 +124,25 @@ export const TransactionTable: React.FC<Props> = (props) => {
                             <TableCell sx={{ color: "#FFF" }}>
                                 <Typography>
                                     <span>Swap</span>{" "}
-                                    {poolData?.token0?.tokenName}{" "}
+                                    {formatTokenName(
+                                        poolData?.token0?.tokenName
+                                    )}{" "}
                                     <span>for</span>{" "}
-                                    {poolData?.token1?.tokenName}
+                                    {formatTokenName(
+                                        poolData?.token1?.tokenName
+                                    )}
                                 </Typography>
                             </TableCell>
                             <TableCell sx={{ color: "#FFF" }}>
-                                {transactionData?.transactionHash}
+                                {txHash}
                             </TableCell>
                             <TableCell sx={{ color: "#FFF" }}>
-                                {transactionData?.amount0}{" "}
-                                {poolData?.token0?.tokenName}
+                                {formatNumber(transactionData?.amount0)}{" "}
+                                {formatTokenName(poolData?.token0?.tokenName)}
                             </TableCell>
                             <TableCell sx={{ color: "#FFF" }}>
-                                {transactionData?.amount1}{" "}
-                                {poolData?.token1?.tokenName}
+                                {formatNumber(transactionData?.amount1)}{" "}
+                                {formatTokenName(poolData?.token1?.tokenName)}
                             </TableCell>
                             <TableCell sx={{ color: "#FFF" }}>
                                 {formatAddress(transactionData?.sender)}

@@ -83,6 +83,7 @@ export const PoolTable: React.FC<Props> = (props) => {
         return (
             <TableBody>
                 {map(data, (poolData, index) => {
+                    const poolAddress = poolData?.address;
                     return (
                         <TableRow
                             key={index}
@@ -90,6 +91,13 @@ export const PoolTable: React.FC<Props> = (props) => {
                                 "& td, & th": {
                                     border: 0,
                                 },
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                window.open(
+                                    `https://etherscan.io/address/${poolAddress}`,
+                                    "_blank"
+                                );
                             }}
                         >
                             <TableCell sx={{ color: "rgb(155, 155, 155)" }}>
@@ -107,7 +115,7 @@ export const PoolTable: React.FC<Props> = (props) => {
                                 {size(poolData.transactions)}
                             </TableCell>
                             <TableCell sx={{ color: "#FFF" }}>
-                                {formatAddress(poolData?.address)}
+                                {poolAddress}
                             </TableCell>
                         </TableRow>
                     );

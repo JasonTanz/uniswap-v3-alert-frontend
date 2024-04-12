@@ -15,3 +15,7 @@ export const getTimeAgo = (timestamp: string) => {
 export const formatTokenName = (name: string) => {
     return name.substring(0, 3);
 };
+
+export const formatNumber = (number: number) => {
+    return number.toFixed(2);
+};
