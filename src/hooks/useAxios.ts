@@ -4,7 +4,6 @@ import axios from "axios";
 type onUpdate = (err: object | null | any, res: any | null) => any;
 
 axios.defaults.baseURL = API_URL;
-console.log(API_URL);
 const useAxios = (axiosParams: object, onCompleted: any, onError: any) => {
     const [loading, setLoading] = useState<boolean>(false);
     const fetchData = (data?: object | null) => {
