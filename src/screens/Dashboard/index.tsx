@@ -1,14 +1,15 @@
-import { Container, Stack, Tab, Tabs } from "@mui/material";
-import { map, size } from "lodash";
+import { Container, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { size } from "lodash";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { socket } from "uniswap-frontend/config/socket";
-import { useLazyFetchData } from "uniswap-frontend/hooks/fetchDataHooks";
 import { formatAddress } from "uniswap-frontend/utils/helper";
 import PoolTable from "uniswap-frontend/containers/PoolTable";
 import TransactionTable from "uniswap-frontend/containers/TransactionTable";
 import { TPool, TTransaction } from "uniswap-frontend/@types/common";
 import { PoolCreateData, SwapEventData } from "./props";
+import uniSwapLogo from "uniswap-frontend/asset/uniswap_logo.jpg";
+import Image from "next/image";
 
 export type DashboardScreenProps = {};
 
@@ -87,8 +88,19 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = () => {
 
     // =============== VIEWS
     return (
-        <Container maxWidth="lg" sx={{ height: "100%" }}>
-            <Stack height={"100%"} my={5} width={"100%"} gap={5}>
+        <Container maxWidth="xl" sx={{ height: "100%" }}>
+            <Stack direction={"row"} pt={5} gap={3} alignItems={"center"}>
+                <Image
+                    src={uniSwapLogo}
+                    width={50}
+                    height={50}
+                    alt="uniSwap-logo"
+                />
+                <Typography color="#FFF" fontSize={"1.5rem"}>
+                    Uniswap v3 Alert System
+                </Typography>
+            </Stack>
+            <Stack height={"100%"} mb={5} mt={3} width={"100%"} gap={5}>
                 <Tabs
                     value={tab}
                     onChange={onHandleTabChange}
